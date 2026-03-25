@@ -258,7 +258,7 @@ def seleccionar_ingredientes(request):
         actuales.update(seleccionados)
 
         request.session["ingredientes_seleccionados"] = list(actuales)
-        return redirect(request.META.get("HTTP_REFERER", "catalogo_categoria"))
+        return redirect(request.META.get("HTTP_REFERER", "productos"))
 
     categorias = ["carnes", "verduras", "lácteos", "frutas", "granos"]
     return render(request, "mattel/productos.html", {
