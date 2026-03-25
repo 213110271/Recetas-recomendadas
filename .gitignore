@@ -1,5 +1,20 @@
+# Python
 __pycache__/
 *.pyc
+
+# Base de datos
 db.sqlite3
+
+# Entorno virtual
+env/
 .venv/
-media/
+
+# Archivos de prueba
+*.log
+*.tmp
+
+# VS Code
+.vscode/
+
+# Otros
+*.json
