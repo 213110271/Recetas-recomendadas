@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from . import api_ingredientes
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.inicio, name='inicio'),
@@ -20,7 +22,6 @@ urlpatterns = [
 
     # ⚡ RUTA DE GUARDAR RECETA
     path('guardar-receta/', views.guardar_receta, name='guardar_receta'),
-    path('seleccionar/', views.seleccionar_ingredientes, name='seleccionar_ingredientes'),
     path('limpiar/', views.limpiar_ingredientes, name='limpiar_ingredientes'),
 
     # ⭐ RUTAS PARA GEMINI IA
@@ -47,4 +48,4 @@ urlpatterns = [
     
     # �🔍 DEBUG
     path('debug/session/', views.debug_session, name='debug_session'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
