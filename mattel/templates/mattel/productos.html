@@ -310,10 +310,22 @@
         <div class="seccion-categorias">
             <h2 class="text-center mb-4" style="color: #333;">📦 Ingredientes Recomendados</h2>
             
+            <div class="categorias-container">
+                {% for cat in categorias %}
+                    <a href="{% url 'catalogo_categoria' cat %}" class="btn-categoria" style="background: #c49a6c;">
+                        <span>{{ cat|title }}</span>
+                    </a>
+                {% endfor %}
+            </div>
+            
             <div class="catalogo-ingredientes">
                 {% for producto in productos %}
                     <div class="ingrediente-card">
+                        {% if producto.imagen %}
                         <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" onerror="this.src='https://via.placeholder.com/100?text={{ producto.nombre|urlencode }}'">
+                        {% else %}
+                        <img src="{% static 'mattel/img/noimg.jpg' %}" alt="{{ producto.nombre }}">
+                        {% endif %}
                         <div class="ingrediente-card-nombre">{{ producto.nombre }}</div>
                         <button class="btn-agregar-rapido" onclick="agregarRapido('{{ producto.nombre }}')">+ Agregar</button>
                     </div>
