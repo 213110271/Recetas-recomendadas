@@ -1,0 +1,556 @@
+{% extends 'mattel/base.html' %}
+{% load static %}
+
+{% block app_title %}Productos{% endblock %}
+
+{% block app_content %}
+
+<style>
+    .fondo-productos {
+        background-color: #f5e8d0;
+        min-height: 100vh;
+        padding: 20px 0;
+    }
+
+    .contenedor-principal {
+        display: grid;
+        grid-template-columns: 1fr 350px;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+        .contenedor-principal {
+            grid-template-columns: 1fr;
+        }
+        .panel-busqueda {
+            order: -1;
+        }
+    }
+
+    .seccion-categorias {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .btn-categoria {
+        border: 4px solid #c49a6c !important;  
+        border-radius: 12px;
+        padding: 10px;
+        display: inline-block;
+        text-align: center;
+        transition: transform 0.2s ease;
+        text-decoration: none !important;
+        color: white !important;
+        margin: 10px;
+    }
+
+    .btn-categoria span {
+        display: block;
+        margin-top: 10px;
+        text-decoration: none !important;
+        color: white !important; 
+        font-weight: 600;
+    }
+
+    .btn-categoria img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .btn-categoria:hover {
+        transform: scale(1.03);
+    }
+
+    .categorias-container {
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    /* Panel Búsqueda */
+    .panel-busqueda {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        height: fit-content;
+        position: sticky;
+        top: 20px;
+    }
+
+    .panel-titulo {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    .buscador-input {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .buscador-input:focus {
+        outline: none;
+        border-color: #667eea;
+    }
+
+    .resultados-busqueda {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 2px solid #ddd;
+        border-top: none;
+        border-radius: 0 0 10px 10px;
+        max-height: 250px;
+        overflow-y: auto;
+        z-index: 100;
+        display: none;
+    }
+
+    .resultado-item {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-size: 13px;
+    }
+
+    .resultado-item:hover {
+        background: #f5f5f5;
+    }
+
+    .posicion-relativa {
+        position: relative;
+    }
+
+    .cantidad-inputs {
+        display: flex;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .cantidad-inputs input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 12px;
+    }
+
+    .cantidad-inputs select {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 12px;
+    }
+
+    .btn-agregar {
+        width: 100%;
+        padding: 8px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 12px;
+        transition: background 0.2s;
+    }
+
+    .btn-agregar:hover {
+        background: #5568d3;
+    }
+
+    .ingrediente-chip {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f0f0f0;
+        padding: 8px 12px;
+        border-radius: 20px;
+        margin: 5px 0;
+        font-size: 12px;
+    }
+
+    .btn-eliminar-chip {
+        background: #ff4757;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+    }
+
+    .btn-accion {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.2s;
+        font-size: 12px;
+    }
+
+    .btn-generar {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .btn-generar:hover {
+        opacity: 0.9;
+    }
+
+    .btn-ver {
+        background: #2ecc71;
+        color: white;
+    }
+
+    .btn-ver:hover {
+        background: #27ae60;
+    }
+
+    .btn-limpiar {
+        background: #ecf0f1;
+        color: #333;
+    }
+
+    .btn-limpiar:hover {
+        background: #bdc3c7;
+    }
+
+    .lista-vacia {
+        text-align: center;
+        color: #999;
+        padding: 15px;
+        font-size: 12px;
+    }
+
+    .catalogo-ingredientes {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 15px;
+    }
+
+    .ingrediente-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .ingrediente-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .ingrediente-card img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    .ingrediente-card-nombre {
+        padding: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #333;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-agregar-rapido {
+        width: 80%;
+        margin: 0 auto 10px;
+        padding: 6px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: bold;
+        transition: background 0.2s;
+    }
+
+    .btn-agregar-rapido:hover {
+        background: #5568d3;
+    }
+</style>
+
+<div class="fondo-productos">
+    <div class="contenedor-principal">
+        
+        <!-- Sección Principal: Catálogo de Ingredientes Recomendados -->
+        <div class="seccion-categorias">
+            <h2 class="text-center mb-4" style="color: #333;">📦 Ingredientes Recomendados</h2>
+            
+            <div class="catalogo-ingredientes">
+                {% for producto in productos %}
+                    <div class="ingrediente-card">
+                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" onerror="this.src='https://via.placeholder.com/100?text={{ producto.nombre|urlencode }}'">
+                        <div class="ingrediente-card-nombre">{{ producto.nombre }}</div>
+                        <button class="btn-agregar-rapido" onclick="agregarRapido('{{ producto.nombre }}')">+ Agregar</button>
+                    </div>
+                {% empty %}
+                    <div style="text-align: center; padding: 30px; color: #999;">
+                        No hay productos disponibles
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Panel Lateral: Búsqueda y Selección -->
+        <div class="panel-busqueda">
+            <div class="panel-titulo">🔍 Buscar Ingredientes</div>
+            
+            <!-- Buscador -->
+            <div class="posicion-relativa" style="margin-bottom: 15px;">
+                <input 
+                    type="text" 
+                    id="busqueda-input"
+                    class="buscador-input"
+                    placeholder="Buscar (cebolla, tomate...)" 
+                    autocomplete="off"
+                >
+                <div class="resultados-busqueda" id="resultados-busqueda"></div>
+            </div>
+
+            <!-- Inputs de Cantidad (Ocultos por defecto) -->
+            <div id="cantidad-section" style="display: none; margin-bottom: 15px;">
+                <div class="cantidad-inputs">
+                    <input 
+                        type="number" 
+                        id="cantidad-input" 
+                        placeholder="Cantidad" 
+                        value="1" 
+                        min="1" 
+                        max="999"
+                    >
+                    <select id="unidad-select">
+                        <option value="unidades">Un.</option>
+                        <option value="gramos">gr</option>
+                        <option value="kilos">kg</option>
+                        <option value="mililitros">ml</option>
+                        <option value="litros">L</option>
+                        <option value="cucharas">cda</option>
+                        <option value="tazas">taza</option>
+                    </select>
+                </div>
+                <button class="btn-agregar" onclick="agregarIngredienteSeleccionado()">
+                    ✓ Agregar
+                </button>
+            </div>
+
+            <!-- Ingredientes Seleccionados -->
+            <div style="margin-bottom: 15px;">
+                <div class="panel-titulo">📋 Seleccionados</div>
+                <div id="lista-ingredientes">
+                    <div class="lista-vacia">Sin ingredientes</div>
+                </div>
+            </div>
+
+            <!-- Botones de Acción -->
+            <button class="btn-accion btn-generar" onclick="window.location.href='{% url 'generar_receta_gemini' %}'">
+                🤖 Generar Receta
+            </button>
+            <button class="btn-accion btn-ver" onclick="window.location.href='{% url 'recetas_con_ingredientes' %}'">
+                👁️ Ver Recetas
+            </button>
+            <button class="btn-accion btn-limpiar" onclick="limpiarTodos()">
+                🗑️ Limpiar
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+let ingredienteActual = null;
+
+function agregarRapido(nombre) {
+    ingredienteActual = nombre;
+    document.getElementById('busqueda-input').value = nombre;
+    document.getElementById('resultados-busqueda').style.display = 'none';
+    document.getElementById('cantidad-section').style.display = 'block';
+    document.getElementById('cantidad-input').focus();
+}
+
+document.getElementById('busqueda-input').addEventListener('input', async function(e) {
+    const query = e.target.value.trim();
+    
+    if (query.length < 2) {
+        document.getElementById('resultados-busqueda').style.display = 'none';
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/buscar-ingredientes/?q=${encodeURIComponent(query)}`);
+        const data = await response.json();
+        
+        const resultadosDiv = document.getElementById('resultados-busqueda');
+        
+        if (data.resultados.length === 0) {
+            resultadosDiv.innerHTML = '<div class="resultado-item" style="color: #999;">Sin resultados</div>';
+        } else {
+            resultadosDiv.innerHTML = data.resultados.map(ing => `
+                <div class="resultado-item" onclick="seleccionarIngrediente('${ing.nombre}')">
+                    <strong>${ing.nombre}</strong><br>
+                    <small style="color: #999;">${ing.categoria}</small>
+                </div>
+            `).join('');
+        }
+        
+        resultadosDiv.style.display = 'block';
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+function seleccionarIngrediente(nombre) {
+    ingredienteActual = nombre;
+    document.getElementById('busqueda-input').value = nombre;
+    document.getElementById('resultados-busqueda').style.display = 'none';
+    document.getElementById('cantidad-section').style.display = 'block';
+    document.getElementById('cantidad-input').focus();
+}
+
+async function agregarIngredienteSeleccionado() {
+    if (!ingredienteActual) return;
+    
+    const cantidad = document.getElementById('cantidad-input').value;
+    const unidad = document.getElementById('unidad-select').value;
+    
+    try {
+        const response = await fetch('/api/agregar-ingrediente/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+                nombre: ingredienteActual,
+                cantidad: parseInt(cantidad),
+                unidad: unidad
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            document.getElementById('busqueda-input').value = '';
+            document.getElementById('cantidad-input').value = '1';
+            document.getElementById('unidad-select').value = 'unidades';
+            document.getElementById('cantidad-section').style.display = 'none';
+            ingredienteActual = null;
+            actualizarListaIngredientes(data.ingredientes);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function actualizarListaIngredientes(ingredientes = null) {
+    try {
+        const response = await fetch('/api/ingredientes-seleccionados/');
+        const data = await response.json();
+        const ingredientes_lista = data.ingredientes;
+        
+        const listaDiv = document.getElementById('lista-ingredientes');
+        
+        if (ingredientes_lista.length === 0) {
+            listaDiv.innerHTML = '<div class="lista-vacia">Sin ingredientes</div>';
+        } else {
+            listaDiv.innerHTML = ingredientes_lista.map(ing => `
+                <div class="ingrediente-chip">
+                    <span><strong>${ing.nombre}</strong><br><small>${ing.cantidad} ${ing.unidad}</small></span>
+                    <button class="btn-eliminar-chip" onclick="eliminarIngrediente('${ing.nombre}')">✕</button>
+                </div>
+            `).join('');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function eliminarIngrediente(nombre) {
+    try {
+        const response = await fetch('/api/eliminar-ingrediente/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ nombre: nombre })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            actualizarListaIngredientes(data.ingredientes);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function limpiarTodos() {
+    if (!confirm('¿Limpiar todos los ingredientes?')) return;
+    
+    try {
+        const response = await fetch('/api/limpiar-ingredientes/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            actualizarListaIngredientes([]);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// Cargar ingredientes al iniciar
+window.addEventListener('load', function() {
+    actualizarListaIngredientes();
+});
+
+// Cerrar resultados al hacer clic fuera
+document.addEventListener('click', function(e) {
+    if (e.target.id !== 'busqueda-input') {
+        document.getElementById('resultados-busqueda').style.display = 'none';
+    }
+});
+</script>
+
+{% endblock %}

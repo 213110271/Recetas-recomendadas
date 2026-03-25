@@ -1,0 +1,485 @@
+[
+  {
+    "model": "mattel.receta",
+    "pk": 2,
+    "fields": {
+      "nombre": "Guisado de Res",
+      "descripcion": "Carne de res cocida lentamente con verduras y especias.",
+      "tipo": "guisado",
+      "ingredientes": [
+        {"nombre": "Carne de res", "cantidad": 500, "unidad": "gramos"},
+        {"nombre": "Zanahoria", "cantidad": 2, "unidad": "unidades"},
+        {"nombre": "Papa", "cantidad": 3, "unidad": "unidades"},
+        {"nombre": "Cebolla", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Ajo", "cantidad": 3, "unidad": "dientes"},
+        {"nombre": "Caldo de res", "cantidad": 1, "unidad": "litros"}
+      ],
+      "pasos": [
+        "Saltear la cebolla y el ajo.",
+        "Agregar la carne y dorarla.",
+        "Añadir las verduras picadas.",
+        "Verter caldo y cocinar 40 minutos a fuego bajo."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 3,
+    "fields": {
+      "nombre": "Sopa de Lentejas",
+      "descripcion": "Sopa nutritiva con lentejas, zanahoria y apio.",
+      "tipo": "sopa",
+      "ingredientes": [
+        {"nombre": "Lentejas", "cantidad": 200, "unidad": "gramos"},
+        {"nombre": "Zanahoria", "cantidad": 2, "unidad": "unidades"},
+        {"nombre": "Apio", "cantidad": 1, "unidad": "tallo"},
+        {"nombre": "Cebolla", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Caldo de verdura", "cantidad": 1, "unidad": "litros"}
+      ],
+      "pasos": [
+        "Lavar las lentejas y remojar.",
+        "Picar verduras en cubos pequeños.",
+        "Hervir agua y agregar lentejas.",
+        "Añadir verduras picadas.",
+        "Cocinar 30 minutos hasta que las lentejas estén suaves."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 4,
+    "fields": {
+      "nombre": "Pastel de Chocolate",
+      "descripcion": "Postre esponjoso con intenso sabor a cacao.",
+      "tipo": "postre",
+      "ingredientes": [
+        {"nombre": "Harina", "cantidad": 200, "unidad": "gramos"},
+        {"nombre": "Cacao en polvo", "cantidad": 50, "unidad": "gramos"},
+        {"nombre": "Azúcar", "cantidad": 150, "unidad": "gramos"},
+        {"nombre": "Huevo", "cantidad": 3, "unidad": "unidades"},
+        {"nombre": "Mantequilla", "cantidad": 100, "unidad": "gramos"},
+        {"nombre": "Leche", "cantidad": 200, "unidad": "mililitros"}
+      ],
+      "pasos": [
+        "Precalentar horno a 180°C.",
+        "Mezclar harina y cacao.",
+        "Batir huevos con azúcar hasta blanquear.",
+        "Incorporar harina y mantequilla derretida.",
+        "Verter en molde y hornear 30 minutos.",
+        "Dejar enfriar antes de servir."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 5,
+    "fields": {
+      "nombre": "Agua de Horchata",
+      "descripcion": "Bebida refrescante hecha con arroz y canela.",
+      "tipo": "bebida",
+      "ingredientes": [
+        {"nombre": "Arroz blanco", "cantidad": 1, "unidad": "taza"},
+        {"nombre": "Agua", "cantidad": 1, "unidad": "litros"},
+        {"nombre": "Canela", "cantidad": 1, "unidad": "rama"},
+        {"nombre": "Azúcar", "cantidad": 100, "unidad": "gramos"},
+        {"nombre": "Vainilla", "cantidad": 1, "unidad": "cucharada"}
+      ],
+      "pasos": [
+        "Lavar arroz y dejarlo remojando.",
+        "Licuar con agua.",
+        "Colar con colador fino.",
+        "Agregar canela, azúcar y vainilla.",
+        "Refrigerar y servir con hielo."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 6,
+    "fields": {
+      "nombre": "Sandwich de Jamón y Queso",
+      "descripcion": "Clásico sandwich con pan tostado, jamón y queso.",
+      "tipo": "sandwich",
+      "ingredientes": [
+        {"nombre": "Pan de sandwich", "cantidad": 2, "unidad": "rebanadas"},
+        {"nombre": "Jamón", "cantidad": 100, "unidad": "gramos"},
+        {"nombre": "Queso", "cantidad": 100, "unidad": "gramos"},
+        {"nombre": "Tomate", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Lechuga", "cantidad": 2, "unidad": "hojas"}
+      ],
+      "pasos": [
+        "Tostar el pan ligeramente.",
+        "Colocar jamón en una rebanada.",
+        "Agregar queso encima.",
+        "Añadir tomate y lechuga.",
+        "Tapar con la otra rebanada de pan.",
+        "Cortar diagonal y servir."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 7,
+    "fields": {
+      "nombre": "Espagueti a la Boloñesa",
+      "descripcion": "Pasta italiana con salsa de carne y tomate.",
+      "tipo": "pasta",
+      "ingredientes": [
+        {"nombre": "Espagueti", "cantidad": 400, "unidad": "gramos"},
+        {"nombre": "Carne molida", "cantidad": 300, "unidad": "gramos"},
+        {"nombre": "Tomate triturado", "cantidad": 400, "unidad": "gramos"},
+        {"nombre": "Cebolla", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Ajo", "cantidad": 2, "unidad": "dientes"},
+        {"nombre": "Aceite de oliva", "cantidad": 3, "unidad": "cucharadas"}
+      ],
+      "pasos": [
+        "Cocinar espagueti según instrucciones.",
+        "Sofréir cebolla y ajo.",
+        "Agregar carne molida y dorar.",
+        "Verter tomate triturado.",
+        "Cocinar 15 minutos a fuego bajo.",
+        "Mezclar con pasta y servir caliente."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 8,
+    "fields": {
+      "nombre": "Filete de Res Asado",
+      "descripcion": "Carne jugosa asada a la parrilla con especias.",
+      "tipo": "carne",
+      "ingredientes": [
+        {"nombre": "Filete de res", "cantidad": 500, "unidad": "gramos"},
+        {"nombre": "Sal", "cantidad": 1, "unidad": "cucharada"},
+        {"nombre": "Pimienta", "cantidad": 0.5, "unidad": "cucharada"},
+        {"nombre": "Ajo", "cantidad": 2, "unidad": "dientes"},
+        {"nombre": "Aceite de oliva", "cantidad": 2, "unidad": "cucharadas"}
+      ],
+      "pasos": [
+        "Sacar carne del refrigerador 30 min antes.",
+        "Salpimentar generosamente.",
+        "Calentar parrilla a fuego alto.",
+        "Asar 4 minutos por lado para jugosidad.",
+        "Reposar 5 minutos antes de servir.",
+        "Decorar con ajo picado fresco."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 9,
+    "fields": {
+      "nombre": "Ceviche de Camarón",
+      "descripcion": "Mariscos frescos marinados en jugo de limón.",
+      "tipo": "mariscos",
+      "ingredientes": [
+        {"nombre": "Camarón fresco", "cantidad": 500, "unidad": "gramos"},
+        {"nombre": "Limón", "cantidad": 5, "unidad": "unidades"},
+        {"nombre": "Cebolla morada", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Cilantro", "cantidad": 1, "unidad": "manojo"},
+        {"nombre": "Ají amarillo", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Sal", "cantidad": 1, "unidad": "cucharada"}
+      ],
+      "pasos": [
+        "Limpiar y cortar camarones.",
+        "Marinar en jugo de limón 20 minutos.",
+        "Picar cebolla en media luna fina.",
+        "Picar cilantro.",
+        "Mezclar camarón con cebolla y cilantro.",
+        "Servir frío con raíz de camote."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 10,
+    "fields": {
+      "nombre": "Tacos Veganos",
+      "descripcion": "Tacos rellenos de vegetales y proteína vegetal.",
+      "tipo": "vegana",
+      "ingredientes": [
+        {"nombre": "Tortilla de maíz", "cantidad": 4, "unidad": "unidades"},
+        {"nombre": "Tofu", "cantidad": 200, "unidad": "gramos"},
+        {"nombre": "Lechuga", "cantidad": 2, "unidad": "hojas"},
+        {"nombre": "Tomate", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Cebolla", "cantidad": 0.5, "unidad": "unidades"},
+        {"nombre": "Salsa picante", "cantidad": 3, "unidad": "cucharadas"}
+      ],
+      "pasos": [
+        "Desmenuzar tofu con tenedor.",
+        "Saltear tofu en sartén con aceite.",
+        "Picar verduras finamente.",
+        "Calentar tortillas.",
+        "Rellenar tortillas con tofu y verduras.",
+        "Servir con salsa picante."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 11,
+    "fields": {
+      "nombre": "Pizza Margarita",
+      "descripcion": "Pizza italiana con tomate, mozzarella y albahaca.",
+      "tipo": "pizza",
+      "ingredientes": [
+        {"nombre": "Masa de pizza", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Tomate", "cantidad": 200, "unidad": "gramos"},
+        {"nombre": "Mozzarella", "cantidad": 200, "unidad": "gramos"},
+        {"nombre": "Albahaca fresca", "cantidad": 10, "unidad": "hojas"},
+        {"nombre": "Aceite de oliva", "cantidad": 3, "unidad": "cucharadas"},
+        {"nombre": "Sal", "cantidad": 1, "unidad": "cucharada"}
+      ],
+      "pasos": [
+        "Precalentar horno a 220°C.",
+        "Extender masa en molde.",
+        "Cubrir con salsa de tomate.",
+        "Distribuir mozzarella.",
+        "Hornear 12 minutos.",
+        "Decorar con albahaca fresca al sacar."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 12,
+    "fields": {
+      "nombre": "Tacos al Pastor",
+      "descripcion": "Tacos mexicanos con carne de cerdo marinada.",
+      "tipo": "tacos",
+      "ingredientes": [
+        {"nombre": "Cerdo marinado", "cantidad": 500, "unidad": "gramos"},
+        {"nombre": "Tortilla de maíz", "cantidad": 6, "unidad": "unidades"},
+        {"nombre": "Piña", "cantidad": 100, "unidad": "gramos"},
+        {"nombre": "Cebolla", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Cilantro", "cantidad": 20, "unidad": "gramos"},
+        {"nombre": "Limón", "cantidad": 2, "unidad": "unidades"}
+      ],
+      "pasos": [
+        "Cocer cerdo marinado en sartén.",
+        "Desmenuzar carne.",
+        "Asar piña cortada.",
+        "Calentar tortillas.",
+        "Rellenar con carne y piña.",
+        "Servir con cilantro y limón."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 13,
+    "fields": {
+      "nombre": "Wrap de Pollo",
+      "descripcion": "Tortilla rellena de pollo, lechuga y aderezo.",
+      "tipo": "wrap",
+      "ingredientes": [
+        {"nombre": "Tortilla grande", "cantidad": 2, "unidades": "unidades"},
+        {"nombre": "Pechuga de pollo", "cantidad": 200, "unidad": "gramos"},
+        {"nombre": "Lechuga", "cantidad": 3, "unidad": "hojas"},
+        {"nombre": "Tomate", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Mayonesa", "cantidad": 3, "unidad": "cucharadas"}
+      ],
+      "pasos": [
+        "Cocinar y desmenuzar pollo.",
+        "Mezclar pollo con mayonesa.",
+        "Colocar lechuga en tortilla.",
+        "Agregar pollo y tomate.",
+        "Enrollar bien.",
+        "Cortar diagonal y servir."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 14,
+    "fields": {
+      "nombre": "Arroz a la Mexicana",
+      "descripcion": "Arroz rojo con jitomate, zanahoria y chícharo.",
+      "tipo": "arroz",
+      "ingredientes": [
+        {"nombre": "Arroz blanco", "cantidad": 2, "unidad": "tazas"},
+        {"nombre": "Tomate", "cantidad": 2, "unidad": "unidades"},
+        {"nombre": "Zanahoria", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Chícharo", "cantidad": 100, "unidad": "gramos"},
+        {"nombre": "Cebolla", "cantidad": 0.5, "unidad": "unidades"},
+        {"nombre": "Caldo de pollo", "cantidad": 4, "unidad": "tazas"}
+      ],
+      "pasos": [
+        "Dorar arroz en aceite caliente.",
+        "Licuar tomate con cebolla.",
+        "Verter salsa de tomate en arroz.",
+        "Agregar caldo de pollo.",
+        "Cocinar 20 minutos a fuego bajo.",
+        "Agregar verduras y cocinar 10 min más."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 15,
+    "fields": {
+      "nombre": "Cereal con Leche",
+      "descripcion": "Desayuno rápido con cereal integral y leche.",
+      "tipo": "cereal",
+      "ingredientes": [
+        {"nombre": "Cereal integral", "cantidad": 1, "unidad": "taza"},
+        {"nombre": "Leche", "cantidad": 200, "unidad": "mililitros"},
+        {"nombre": "Miel", "cantidad": 1, "unidad": "cucharada"},
+        {"nombre": "Plátano", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Fresas", "cantidad": 100, "unidad": "gramos"}
+      ],
+      "pasos": [
+        "Verter cereal en un plato hondo.",
+        "Añadir leche fría.",
+        "Rociar con miel.",
+        "Agregar frutas picadas.",
+        "Servir inmediatamente.",
+        "Disfrutar del desayuno completo."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 16,
+    "fields": {
+      "nombre": "Pan de Ajo",
+      "descripcion": "Pan horneado con mantequilla y ajo.",
+      "tipo": "pan",
+      "ingredientes": [
+        {"nombre": "Pan francés", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Mantequilla", "cantidad": 100, "unidad": "gramos"},
+        {"nombre": "Ajo", "cantidad": 4, "unidad": "dientes"},
+        {"nombre": "Perejil fresco", "cantidad": 20, "unidad": "gramos"},
+        {"nombre": "Sal", "cantidad": 1, "unidad": "cucharada"}
+      ],
+      "pasos": [
+        "Picar ajo muy finamente.",
+        "Mezclar mantequilla con ajo.",
+        "Cortar pan en diagonal.",
+        "Untar mantequilla con ajo.",
+        "Hornear a 180°C por 10 minutos.",
+        "Espolvorear perejil antes de servir."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 17,
+    "fields": {
+      "nombre": "Dulce de Leche",
+      "descripcion": "Postre tradicional hecho con leche caramelizada.",
+      "tipo": "dulce",
+      "ingredientes": [
+        {"nombre": "Leche de vaca", "cantidad": 1, "unidad": "litros"},
+        {"nombre": "Azúcar", "cantidad": 200, "unidad": "gramos"},
+        {"nombre": "Vainilla", "cantidad": 1, "unidad": "rama"},
+        {"nombre": "Bicarbonato", "cantidad": 0.5, "unidad": "cucharada"}
+      ],
+      "pasos": [
+        "Verter leche en olla.",
+        "Agregar azúcar y vainilla.",
+        "Cocinar a fuego bajo constant removiendo.",
+        "Cuando oscurezca, agregar bicarbonato.",
+        "Cocinar 2-3 horas removiendo constantemente.",
+        "Enfriar en recipiente hermético."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 18,
+    "fields": {
+      "nombre": "Palomitas Saladas",
+      "descripcion": "Botana ligera de maíz inflado con sal.",
+      "tipo": "salado",
+      "ingredientes": [
+        {"nombre": "Maíz para palomitas", "cantidad": 100, "unidad": "gramos"},
+        {"nombre": "Aceite", "cantidad": 3, "unidad": "cucharadas"},
+        {"nombre": "Sal", "cantidad": 1, "unidad": "cucharada"},
+        {"nombre": "Pimienta", "cantidad": 0.5, "unidad": "cucharada"}
+      ],
+      "pasos": [
+        "Calentar aceite en olla con tapa.",
+        "Agregar maíz.",
+        "Tapar olla.",
+        "Mover constantemente para evitar quemadas.",
+        "Esperar a que deje de sonar.",
+        "Sazonar con sal y pimienta."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 19,
+    "fields": {
+      "nombre": "Ensalada Light",
+      "descripcion": "Ensalada fresca baja en calorías.",
+      "tipo": "light",
+      "ingredientes": [
+        {"nombre": "Lechuga", "cantidad": 200, "unidad": "gramos"},
+        {"nombre": "Tomate", "cantidad": 2, "unidad": "unidades"},
+        {"nombre": "Pepino", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Cebolla morada", "cantidad": 0.5, "unidad": "unidades"},
+        {"nombre": "Vinagre balsámico", "cantidad": 2, "unidad": "cucharadas"},
+        {"nombre": "Aceite de oliva", "cantidad": 1, "unidad": "cucharada"}
+      ],
+      "pasos": [
+        "Lavar y secar lechuga.",
+        "Picar verduras en cubos pequeños.",
+        "Preparar aderezo con vinagre y aceite.",
+        "Mezclar verduras en ensaladera.",
+        "Rociar con aderezo.",
+        "Servir inmediatamente."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 20,
+    "fields": {
+      "nombre": "Huevos Rápidos",
+      "descripcion": "Platillo sencillo de huevos revueltos listo en minutos.",
+      "tipo": "rápida",
+      "ingredientes": [
+        {"nombre": "Huevo", "cantidad": 3, "unidad": "unidades"},
+        {"nombre": "Mantequilla", "cantidad": 20, "unidad": "gramos"},
+        {"nombre": "Sal", "cantidad": 0.5, "unidad": "cucharada"},
+        {"nombre": "Pimienta", "cantidad": 0.25, "unidad": "cucharada"}
+      ],
+      "pasos": [
+        "Batir huevos en un plato.",
+        "Calentar mantequilla en sartén.",
+        "Verter huevos batidos.",
+        "Revolver constantemente con espátula.",
+        "Cocinar 3-5 minutos.",
+        "Salpimentar al gusto y servir."
+      ]
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 21,
+    "fields": {
+      "nombre": "Ceviche de Pescado",
+      "descripcion": "Plato fresco de pescado marinado en limón y especias.",
+      "tipo": "entrada",
+      "ingredientes": [
+        {"nombre": "Pescado blanco fresco", "cantidad": 500, "unidad": "gramos"},
+        {"nombre": "Limón", "cantidad": 6, "unidad": "unidades"},
+        {"nombre": "Cebolla morada", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Cilantro", "cantidad": 30, "unidad": "gramos"},
+        {"nombre": "Ají amarillo", "cantidad": 1, "unidad": "unidades"},
+        {"nombre": "Camote", "cantidad": 1, "unidad": "unidades"}
+      ],
+      "pasos": [
+        "Cortar pescado en cubos pequeños.",
+        "Marinarlo en jugo de limón fresco 15 minutos.",
+        "Picar cebolla morada finamente.",
+        "Mezclar pescado con cebolla y cilantro.",
+        "Servir sobre camote cocido.",
+        "Acompañar con maíz tostado."
+      ]
+    }
+  }
+]

@@ -1,0 +1,71 @@
+🤖 GENERADOR DE RECETAS CON IA - GUÍA RÁPIDA
+=============================================
+
+## ⚡ PASOS RÁPIDOS PARA EMPEZAR
+
+### 1️⃣ Obtener API Key (2 minutos)
+   - Ve a: https://aistudio.google.com/app/apikey
+   - Haz clic en "Create API key"
+   - Copia tu clave (empieza con AIzaSy...)
+
+### 2️⃣ Configurar en tu PC (Windows PowerShell)
+   
+   Abre PowerShell y ejecuta:
+   ```powershell
+   $env:GEMINI_API_KEY = "tu_api_key_aqui"
+   ```
+
+   Para verificar que funcionó:
+   ```powershell
+   $env:GEMINI_API_KEY
+   ```
+
+   Debería mostrar tu API key.
+
+### 3️⃣ Ejecutar el proyecto
+   ```bash
+   python manage.py runserver
+   ```
+
+### 4️⃣ Usar la funcionalidad
+   - Ve a http://localhost:8000/productos/
+   - Selecciona ingredientes
+   - Haz clic en "🤖 Receta con IA"
+   - ¡Disfruta tu receta generada!
+
+---
+
+## 📝 ALTERNATIVA: Configurar con .env (Recomendado para desarrollo)
+
+1. Crea un archivo `.env` en la raíz del proyecto
+2. Escribe: `GEMINI_API_KEY=tu_api_key_aqui`
+3. Guarda el archivo
+4. Ejecuta: `pip install python-dotenv`
+5. ¡Listo! Ya puedes usar la funcionalidad
+
+---
+
+## 🐛 SOLUCIÓN DE PROBLEMAS
+
+### "API key not found"
+- Verifica que ejecutaste la línea de configuración en PowerShell
+- Reinicia PowerShell y vuelve a intentar
+
+### "Quota exceeded"
+- Google te da 60 llamadas por minuto gratis
+- Espera 1 minuto y vuelve a intentar
+
+### "Connection error"
+- Verifica que tienes internet
+- Comprueba que la API key es válida en Google AI Studio
+
+---
+
+## 📚 MÁS INFORMACIÓN
+
+Para instrucciones detalladas: Ver `README_GEMINI_IA.md`
+Para setup avanzado: Ver `GEMINI_SETUP.md`
+
+---
+
+**¡Disfruta creando recetas con IA!** 🍳✨

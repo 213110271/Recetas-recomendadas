@@ -1,0 +1,242 @@
+[
+  {
+    "model": "mattel.receta",
+    "pk": 2,
+    "fields": {
+      "nombre": "Guisado de Res",
+      "descripcion": "Carne de res cocida lentamente con verduras y especias.",
+      "tipo": "guisado",
+      "tiempo": "45 minutos",
+      "dificultad": "Media",
+      "pasos": "1. Lavar 500g carne de res y cortar en cubos\n2. Saltear en olla caliente con aceite\n3. Agregar 1 cebolla y 3 dientes ajo\n4. Incorporar 2 zanahorias y 3 papas\n5. Verter 1L caldo de res\n6. Cocinar 40 min a fuego bajo\n7. Salpimentar y servir"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 3,
+    "fields": {
+      "nombre": "Sopa de Lentejas",
+      "descripcion": "Sopa nutritiva con lentejas, zanahoria y apio.",
+      "tipo": "sopa",
+      "tiempo": "35 minutos",
+      "dificultad": "Fácil",
+      "pasos": "1. Lavar 200g lentejas y remojar\n2. Hervir agua en olla\n3. Agregar lentejas al agua\n4. Picar 2 zanahorias, 1 tallo apio y 1 cebolla\n5. Agregar verduras\n6. Cocinar 30 min\n7. Salpimentar y servir"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 4,
+    "fields": {
+      "nombre": "Pastel de Chocolate",
+      "descripcion": "Postre esponjoso con intenso sabor a cacao.",
+      "tipo": "postre",
+      "tiempo": "50 minutos",
+      "dificultad": "Media",
+      "pasos": "1. Precalentar horno a 180°C\n2. Mezclar 200g harina con 50g cacao\n3. Batir 3 huevos con 150g azúcar\n4. Incorporar harina y 100g mantequilla\n5. Verter en molde\n6. Hornear 30 minutos\n7. Enfriar antes de servir"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 5,
+    "fields": {
+      "nombre": "Agua de Horchata",
+      "descripcion": "Bebida refrescante hecha con arroz y canela.",
+      "tipo": "bebida",
+      "tiempo": "15 minutos",
+      "dificultad": "Fácil",
+      "pasos": "1. Lavar 1 taza arroz\n2. Licuar con 1L agua\n3. Colar con colador fino\n4. Agregar 100g azúcar, 1 rama canela y vainilla\n5. Refrigerar\n6. Servir con hielo"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 6,
+    "fields": {
+      "nombre": "Sandwich de Jamón y Queso",
+      "descripcion": "Clásico sandwich con pan tostado, jamón y queso.",
+      "tipo": "sandwich",
+      "tiempo": "5 minutos",
+      "dificultad": "Fácil",
+      "pasos": "1. Tostar 2 rebanadas pan\n2. Colocar 100g jamón\n3. Agregar 100g queso\n4. Añadir 1 tomate y 2 hojas lechuga\n5. Tapar con otra rebanada\n6. Cortar diagonal\n7. Servir"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 7,
+    "fields": {
+      "nombre": "Espagueti a la Boloñesa",
+      "descripcion": "Pasta italiana con salsa de carne y tomate.",
+      "tipo": "pasta",
+      "tiempo": "30 minutos",
+      "dificultad": "Media",
+      "pasos": "1. Cocinar 400g espagueti\n2. Sofreír 1 cebolla y 2 dientes ajo\n3. Agregar 300g carne molida\n4. Verter 400g tomate triturado\n5. Cocinar 15 min\n6. Mezclar con pasta\n7. Servir"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 8,
+    "fields": {
+      "nombre": "Filete de Res Asado",
+      "descripcion": "Carne jugosa asada a la parrilla con especias.",
+      "tipo": "carne",
+      "tiempo": "15 minutos",
+      "dificultad": "Fácil",
+      "pasos": "1. Sacar 500g filete 30 min antes\n2. Salpimentar\n3. Calentar parrilla a fuego alto\n4. Asar 4 min por lado\n5. Reposar 5 min\n6. Decorar con ajo\n7. Servir"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 9,
+    "fields": {
+      "nombre": "Ceviche de Camarón",
+      "descripcion": "Mariscos frescos marinados en jugo de limón.",
+      "tipo": "mariscos",
+      "tiempo": "25 minutos",
+      "dificultad": "Media",
+      "pasos": "1. Limpiar 500g camarón\n2. Marinar en jugo de 5 limones 20 min\n3. Picar 1 cebolla morada\n4. Picar cilantro\n5. Mezclar camarón con cebolla y cilantro\n6. Servir frío\n7. Acompañar con camote"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 10,
+    "fields": {
+      "nombre": "Tacos Veganos",
+      "descripcion": "Tacos rellenos de vegetales y proteína vegetal.",
+      "tipo": "vegana",
+      "tiempo": "20 minutos",
+      "dificultad": "Fácil",
+      "pasos": "1. Desmenuzar 200g tofu\n2. Saltear en sartén\n3. Picar lechuga, tomate y cebolla\n4. Calentar 4 tortillas\n5. Rellenar con tofu y verduras\n6. Servir con salsa picante\n7. Decorar con cilantro"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 11,
+    "fields": {
+      "nombre": "Pizza Margarita",
+      "descripcion": "Pizza italiana con tomate, mozzarella y albahaca.",
+      "tipo": "pizza",
+      "tiempo": "25 minutos",
+      "dificultad": "Media",
+      "pasos": "1. Precalentar horno a 220°C\n2. Extender masa en molde\n3. Cubrir con 200g tomate\n4. Distribuir 200g mozzarella\n5. Hornear 12 min\n6. Decorar con albahaca\n7. Rociar aceite de oliva"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 12,
+    "fields": {
+      "nombre": "Tacos al Pastor",
+      "descripcion": "Tacos mexicanos con carne de cerdo marinada.",
+      "tipo": "tacos",
+      "tiempo": "40 minutos",
+      "dificultad": "Media",
+      "pasos": "1. Cocinar 500g cerdo marinado\n2. Desmenuzar carne\n3. Asar 100g piña\n4. Calentar 6 tortillas\n5. Rellenar con carne y piña\n6. Servir con cilantro\n7. Acompañar con limón"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 13,
+    "fields": {
+      "nombre": "Wrap de Pollo",
+      "descripcion": "Tortilla rellena de pollo, lechuga y aderezo.",
+      "tipo": "wrap",
+      "tiempo": "15 minutos",
+      "dificultad": "Fácil",
+      "pasos": "1. Cocinar 200g pechuga pollo\n2. Desmenuzar y mezclar con mayonesa\n3. Colocar lechuga en tortilla\n4. Agregar pollo y tomate\n5. Enrollar bien\n6. Cortar diagonal\n7. Servir"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 14,
+    "fields": {
+      "nombre": "Arroz a la Mexicana",
+      "descripcion": "Arroz rojo con jitomate, zanahoria y chícharo.",
+      "tipo": "arroz",
+      "tiempo": "30 minutos",
+      "dificultad": "Media",
+      "pasos": "1. Dorar 2 tazas arroz en aceite\n2. Licuar 2 tomates con cebolla\n3. Verter salsa sobre arroz\n4. Agregar 4 tazas caldo\n5. Cocinar 20 min\n6. Agregar 1 zanahoria y chícharo\n7. Cocinar 10 min más"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 15,
+    "fields": {
+      "nombre": "Cereal con Leche",
+      "descripcion": "Desayuno rápido con cereal integral y leche.",
+      "tipo": "cereal",
+      "tiempo": "2 minutos",
+      "dificultad": "Fácil",
+      "pasos": "1. Verter 1 taza cereal\n2. Añadir 200ml leche fría\n3. Rociar 1 cucharada miel\n4. Agregar 1 plátano picado\n5. Añadir 100g fresas\n6. Mezclar\n7. Disfrutar"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 16,
+    "fields": {
+      "nombre": "Pan de Ajo",
+      "descripcion": "Pan horneado con mantequilla y ajo.",
+      "tipo": "pan",
+      "tiempo": "15 minutos",
+      "dificultad": "Fácil",
+      "pasos": "1. Picar 4 dientes ajo\n2. Mezclar 100g mantequilla con ajo\n3. Cortar pan francés\n4. Untar mantequilla\n5. Hornear a 180°C 10 min\n6. Espolvorear perejil\n7. Servir"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 17,
+    "fields": {
+      "nombre": "Dulce de Leche",
+      "descripcion": "Postre tradicional hecho con leche caramelizada.",
+      "tipo": "dulce",
+      "tiempo": "180 minutos",
+      "dificultad": "Difícil",
+      "pasos": "1. Verter 1L leche en olla\n2. Agregar 200g azúcar y vainilla\n3. Cocinar a fuego bajo removiendo\n4. Cuando oscurezca agregar bicarbonato\n5. Cocinar 2-3 horas\n6. Enfriar\n7. Servir"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 18,
+    "fields": {
+      "nombre": "Palomitas Saladas",
+      "descripcion": "Botana ligera de maíz inflado con sal.",
+      "tipo": "salado",
+      "tiempo": "10 minutos",
+      "dificultad": "Fácil",
+      "pasos": "1. Calentar 3 cucharadas aceite\n2. Agregar 100g maíz\n3. Tapar olla\n4. Mover constantemente\n5. Esperar a que deje de sonar\n6. Sazonar con sal\n7. Agregar pimienta"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 19,
+    "fields": {
+      "nombre": "Ensalada Light",
+      "descripcion": "Ensalada fresca baja en calorías.",
+      "tipo": "light",
+      "tiempo": "10 minutos",
+      "dificultad": "Fácil",
+      "pasos": "1. Lavar 200g lechuga\n2. Picar 2 tomates\n3. Picar 1 pepino\n4. Picar 0.5 cebolla\n5. Preparar aderezo con vinagre y aceite\n6. Mezclar verduras\n7. Rociar aderezo y servir"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 20,
+    "fields": {
+      "nombre": "Huevos Rápidos",
+      "descripcion": "Platillo sencillo de huevos revueltos listo en minutos.",
+      "tipo": "rápida",
+      "tiempo": "5 minutos",
+      "dificultad": "Fácil",
+      "pasos": "1. Batir 3 huevos\n2. Calentar 20g mantequilla\n3. Verter huevos\n4. Revolver constantemente\n5. Cocinar 3-5 min\n6. Salpimentar\n7. Servir"
+    }
+  },
+  {
+    "model": "mattel.receta",
+    "pk": 21,
+    "fields": {
+      "nombre": "Ceviche de Pescado",
+      "descripcion": "Plato fresco de pescado marinado en limón y especias.",
+      "tipo": "entrada",
+      "tiempo": "20 minutos",
+      "dificultad": "Media",
+      "pasos": "1. Cortar 500g pescado blanco\n2. Marinar en 6 limones 15 min\n3. Picar 1 cebolla morada\n4. Picar cilantro fresco\n5. Mezclar pescado con cebolla y cilantro\n6. Servir sobre camote cocido\n7. Acompañar con maíz tostado"
+    }
+  }
+]

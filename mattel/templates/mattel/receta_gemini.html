@@ -1,0 +1,150 @@
+{% extends "mattel/base.html" %}
+{% load static %}
+
+{% block app_title %}Receta Generada por IA{% endblock %}
+
+{% block app_content %}
+
+<style>
+    .fondo-rosa {
+        background-color: #f5e8d0 !important;
+        min-height: 100vh;
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .sombra-negra {
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    .badge-ia {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        font-weight: bold;
+    }
+
+    .card-receta {
+        border-radius: 18px;
+        border: 2px solid #667eea;
+        overflow: hidden;
+    }
+</style>
+
+<div class="fondo-rosa">
+    <div class="container mt-5">
+        
+        <!-- Encabezado -->
+        <div class="text-center mb-4">
+            <span class="badge badge-ia p-2">🤖 Generada por IA (Gemini)</span>
+            <h1 class="mt-3 fw-bold">{{ receta.nombre }}</h1>
+        </div>
+
+        <!-- Tarjeta Principal -->
+        <div class="card card-receta sombra-negra mx-auto mb-4" style="max-width: 800px;">
+            <div class="card-body p-4">
+                
+                <!-- Información rápida -->
+                <div class="row text-center mb-4">
+                    <div class="col-md-4">
+                        <h5>⏱️ Tiempo</h5>
+                        <p class="fw-bold">{{ receta.tiempo }}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>📊 Dificultad</h5>
+                        <p class="fw-bold">{{ receta.dificultad }}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>🍽️ Tipo</h5>
+                        <p class="fw-bold">{{ receta.tipo|title }}</p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- Descripción -->
+                <div class="mb-4">
+                    <h4 class="fw-bold mb-2">📝 Descripción</h4>
+                    <p>{{ receta.descripcion }}</p>
+                </div>
+
+                <!-- Rendimiento -->
+                {% if receta.rendimiento %}
+                <div class="mb-4 alert alert-info">
+                    <strong>Rendimiento:</strong> {{ receta.rendimiento }}
+                </div>
+                {% endif %}
+
+                <!-- Pasos -->
+                <div class="mb-4">
+                    <h4 class="fw-bold mb-3">👨‍🍳 Pasos de Preparación</h4>
+                    <ol style="font-size: 1.05rem; line-height: 1.8;">
+                        {% for paso in receta.pasos %}
+                        <li class="mb-2">{{ paso }}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+
+                <!-- Ingredientes utilizados -->
+                <div class="mb-4 alert alert-success">
+                    <h5 class="fw-bold mb-2">✅ Ingredientes Utilizados:</h5>
+                    <p class="mb-0">{{ ingredientes|join:", " }}</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="text-center mb-5">
+            <button class="btn btn-success btn-lg me-2" onclick="guardarReceta()">
+                💾 Guardar Receta
+            </button>
+            
+            <a href="{% url 'generar_multiples_ia' %}" class="btn btn-primary btn-lg me-2">
+                🔄 Generar Otras Recetas
+            </a>
+            
+            <a href="{% url 'productos' %}" class="btn btn-secondary btn-lg">
+                ← Volver a Productos
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function guardarReceta() {
+    const formData = {
+        nombre: "{{ receta.nombre }}",
+        descripcion: "{{ receta.descripcion }}",
+        pasos: {{ receta.pasos|safe }},
+        tiempo: "{{ receta.tiempo }}",
+        dificultad: "{{ receta.dificultad }}",
+        tipo: "{{ receta.tipo }}",
+        ingredientes: {{ ingredientes|safe }}
+    };
+
+    fetch("{% url 'guardar_receta_gemini' %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("¡Receta guardada exitosamente!");
+            window.location.href = data.redirect;
+        } else {
+            alert("Error: " + data.message);
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Error al guardar la receta");
+    });
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+🎯 GUÍA DE PRUEBA EN NAVEGADOR
+═════════════════════════════════════════════════════════════════════
+
+🌐 SERVIDOR EN VIVO:
+   http://127.0.0.1:8090/
+
+✅ PASOS PARA PROBAR:
+
+1️⃣  VE A PRODUCTOS
+   URL: http://127.0.0.1:8090/productos/
+
+2️⃣  BUSCA INGREDIENTES EN LÍNEA (panel derecha)
+   Escribe en el buscador:
+   - "tomate"
+   - "ajo"
+   - "cebolla"
+   - "sal"
+   
+   Verás resultados de Spoonacular + BD local
+
+3️⃣  AGREGA INGREDIENTES
+   - Haz click en los ingredientes o "+ Agregar"
+   - Selecciona cantidad y unidad
+   - Confirma
+
+4️⃣  GENERA RECETA CON IA
+   Una vez tengas 3+ ingredientes:
+   - Haz click en botón "🤖 Generar Receta"
+   - Sistema intentará 3 veces con Gemini
+   - Si cuota agotada, usa fallback automático
+   - ¡Verás la receta generada! 🍳
+
+5️⃣  VERIFICA LOS LOGS EN TERMINAL
+   En la terminal donde corre el servidor verás:
+   ✅ "Receta generada exitosamente con Gemini"
+   O
+   ⚠️  "Cuota de Gemini agotada... usando fallback"
+
+═════════════════════════════════════════════════════════════════════
+
+🔍 QUÉ PROBAR:
+
+✓ Búsqueda funciona (online + local)
+✓ Agrega ingredientes correctamente
+✓ Generación de receta sin errores (con IA o fallback)
+✓ Receta tiene nombre, pasos, tiempo, dificultad
+
+═════════════════════════════════════════════════════════════════════
+
+💡 Si algo falla, revisa:
+
+1. Terminal: ¿Hay errores?
+2. Navegador: ¿Hay mensajes de error?
+3. Consola browser (F12): ¿JavaScript errors?
+4. Verifica en http://127.0.0.1:8090/debug/session/ tu sesión
+
+═════════════════════════════════════════════════════════════════════

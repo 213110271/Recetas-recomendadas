@@ -1,0 +1,226 @@
+{% extends "mattel/base.html" %}
+{% load static %}
+
+{% block app_title %}Recetas Generadas por IA{% endblock %}
+
+{% block app_content %}
+
+<style>
+    .fondo-rosa {
+        background-color: #f5e8d0 !important;
+        min-height: 100vh;
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .sombra-negra {
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    .badge-ia {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        font-weight: bold;
+    }
+
+    .card-receta {
+        border-radius: 18px;
+        border: 2px solid #667eea;
+        transition: transform 0.3s ease;
+    }
+
+    .card-receta:hover {
+        transform: translateY(-5px);
+    }
+
+    .info-rapida {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin: 15px 0;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 10px;
+    }
+
+    .info-item {
+        text-align: center;
+        flex: 1;
+        min-width: 100px;
+    }
+</style>
+
+<div class="fondo-rosa">
+    <div class="container mt-5">
+        
+        <!-- Encabezado -->
+        <div class="text-center mb-5">
+            <span class="badge badge-ia p-2">🤖 Generadas por IA (Gemini)</span>
+            <h1 class="mt-3 fw-bold">Tus Recetas Personalizadas</h1>
+            <p class="text-muted">Basadas en: <strong>{{ ingredientes|join:", " }}</strong></p>
+        </div>
+
+        <!-- Contenedor de recetas -->
+        <div class="row">
+            {% for receta in recetas %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card card-receta sombra-negra h-100">
+                    <div class="card-body d-flex flex-column">
+                        
+                        <!-- Título -->
+                        <h4 class="fw-bold text-center mb-3">{{ receta.nombre }}</h4>
+
+                        <!-- Información rápida -->
+                        <div class="info-rapida">
+                            <div class="info-item">
+                                <div style="font-size: 1.3rem;">⏱️</div>
+                                <small class="text-muted">Tiempo</small>
+                                <p class="fw-bold mb-0">{{ receta.tiempo }}</p>
+                            </div>
+                            <div class="info-item">
+                                <div style="font-size: 1.3rem;">📊</div>
+                                <small class="text-muted">Dificultad</small>
+                                <p class="fw-bold mb-0">{{ receta.dificultad }}</p>
+                            </div>
+                            <div class="info-item">
+                                <div style="font-size: 1.3rem;">🍽️</div>
+                                <small class="text-muted">Tipo</small>
+                                <p class="fw-bold mb-0">{{ receta.tipo|title }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Descripción -->
+                        <p class="text-muted flex-grow-1">{{ receta.descripcion }}</p>
+
+                        <!-- Pasos resumidos -->
+                        <div class="mb-3">
+                            <h6 class="fw-bold">Pasos:</h6>
+                            <ol style="font-size: 0.9rem; padding-left: 20px;">
+                                {% for paso in receta.pasos|slice:":3" %}
+                                <li>{{ paso|truncatewords:10 }}</li>
+                                {% endfor %}
+                                {% if receta.pasos|length > 3 %}
+                                <li><em>... {{ receta.pasos|length|add:"-3" }} pasos más</em></li>
+                                {% endif %}
+                            </ol>
+                        </div>
+
+                        <!-- Botón ver completa -->
+                        <a href="#" class="btn btn-primary btn-sm w-100" 
+                           onclick="mostrarDetalles('{{ receta.nombre|escapejs }}', '{{ receta.descripcion|escapejs }}', '{{ receta.pasos|safe }}', '{{ receta.tiempo }}', '{{ receta.dificultad }}', '{{ receta.tipo }}')">
+                            Ver Receta Completa →
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Botón para generar más -->
+        <div class="text-center mt-5 mb-5">
+            <a href="{% url 'generar_multiples_ia' %}" class="btn btn-warning btn-lg me-2">
+                🔄 Generar Más Recetas
+            </a>
+            <a href="{% url 'productos' %}" class="btn btn-secondary btn-lg">
+                ← Volver a Productos
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal para ver detalles completos -->
+<div class="modal fade" id="detallesModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitulo"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="modalContenido"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="guardarRecetaActual()">
+                    💾 Guardar Receta
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let recetaActual = null;
+
+function mostrarDetalles(nombre, descripcion, pasos, tiempo, dificultad, tipo) {
+    recetaActual = {
+        nombre: nombre,
+        descripcion: descripcion,
+        pasos: JSON.parse(pasos.replace(/&quot;/g, '"')),
+        tiempo: tiempo,
+        dificultad: dificultad,
+        tipo: tipo,
+        ingredientes: {{ ingredientes|safe }}
+    };
+
+    document.getElementById('modalTitulo').textContent = nombre;
+    
+    let html = `
+        <div class="info-rapida">
+            <div class="info-item">
+                <div>⏱️ ${tiempo}</div>
+            </div>
+            <div class="info-item">
+                <div>📊 ${dificultad}</div>
+            </div>
+            <div class="info-item">
+                <div>🍽️ ${tipo}</div>
+            </div>
+        </div>
+
+        <h6 class="fw-bold mt-3">Descripción:</h6>
+        <p>${descripcion}</p>
+
+        <h6 class="fw-bold mt-3">Pasos de Preparación:</h6>
+        <ol>
+    `;
+
+    recetaActual.pasos.forEach(paso => {
+        html += `<li>${paso}</li>`;
+    });
+
+    html += `
+        </ol>
+        <div class="alert alert-success mt-3">
+            <strong>Ingredientes:</strong> ${recetaActual.ingredientes.join(", ")}
+        </div>
+    `;
+
+    document.getElementById('modalContenido').innerHTML = html;
+    new bootstrap.Modal(document.getElementById('detallesModal')).show();
+}
+
+function guardarRecetaActual() {
+    if (!recetaActual) return;
+
+    fetch("{% url 'guardar_receta_gemini' %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+        body: JSON.stringify(recetaActual)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert("¡Receta guardada exitosamente!");
+        bootstrap.Modal.getInstance(document.getElementById('detallesModal')).hide();
+    })
+    .catch(error => console.error("Error:", error));
+}
+</script>
+
+{% endblock %}

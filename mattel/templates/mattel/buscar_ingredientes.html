@@ -1,0 +1,437 @@
+{% extends 'mattel/base.html' %}
+{% load static %}
+
+{% block app_title %}Buscar Ingredientes{% endblock %}
+
+{% block app_content %}
+
+<style>
+    .fondo-busqueda {
+        background-color: #f5e8d0;
+        min-height: 100vh;
+        padding: 20px 0;
+    }
+
+    .container-busqueda {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .buscador-box {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        margin-bottom: 30px;
+    }
+
+    .input-busqueda {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .input-busqueda input {
+        flex: 1;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        font-size: 16px;
+    }
+
+    .input-busqueda input:focus {
+        outline: none;
+        border-color: #667eea;
+    }
+
+    .resultados-busqueda {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 2px solid #ddd;
+        border-top: none;
+        border-radius: 0 0 10px 10px;
+        max-height: 300px;
+        overflow-y: auto;
+        z-index: 100;
+        display: none;
+    }
+
+    .resultado-item {
+        padding: 12px 15px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .resultado-item:hover {
+        background: #f5f5f5;
+    }
+
+    .resultado-nombre {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .resultado-categoria {
+        font-size: 0.85rem;
+        color: #999;
+    }
+
+    .ingrediente-card {
+        background: #f9f9f9;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .ingrediente-info {
+        flex: 1;
+    }
+
+    .ingrediente-nombre {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+
+    .ingrediente-cantidad {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .ingrediente-cantidad input {
+        width: 80px;
+        padding: 6px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .ingrediente-cantidad select {
+        padding: 6px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .btn-eliminar {
+        background: #ff4757;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .btn-eliminar:hover {
+        background: #ff3838;
+    }
+
+    .panel-ingredientes {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .panel-titulo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .botones-accion {
+        display: flex;
+        gap: 10px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+    }
+
+    .btn-primario {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.2s;
+        flex: 1;
+        min-width: 150px;
+    }
+
+    .btn-primario:hover {
+        background: #5568d3;
+    }
+
+    .btn-secundario {
+        background: #ddd;
+        color: #333;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.2s;
+        flex: 1;
+        min-width: 150px;
+    }
+
+    .btn-secundario:hover {
+        background: #ccc;
+    }
+
+    .lista-vacia {
+        text-align: center;
+        color: #999;
+        padding: 20px;
+    }
+
+    .posicion-relativa {
+        position: relative;
+    }
+</style>
+
+<div class="fondo-busqueda">
+    <div class="container-busqueda">
+        
+        <!-- Buscador -->
+        <div class="buscador-box">
+            <h2 class="text-center mb-4">🔍 Busca tus Ingredientes</h2>
+            
+            <div class="input-busqueda">
+                <div class="posicion-relativa" style="flex: 1;">
+                    <input 
+                        type="text" 
+                        id="busqueda-input"
+                        placeholder="Escribe para buscar: cebolla, tomate, pollo..." 
+                        autocomplete="off"
+                    >
+                    <div class="resultados-busqueda" id="resultados-busqueda"></div>
+                </div>
+            </div>
+
+            <div class="input-busqueda" id="inputs-cantidad" style="display: none;">
+                <input type="number" id="cantidad-input" placeholder="Cantidad" value="1" min="1" max="999">
+                <select id="unidad-select">
+                    <option value="unidades">Unidades</option>
+                    <option value="gramos">Gramos</option>
+                    <option value="kilos">Kilos</option>
+                    <option value="mililitros">Mililitros</option>
+                    <option value="litros">Litros</option>
+                    <option value="cucharas">Cucharas</option>
+                    <option value="tazas">Tazas</option>
+                </select>
+                <button class="btn-primario" id="btn-agregar" onclick="agregarIngredienteSeleccionado()">
+                    ✓ Agregar
+                </button>
+            </div>
+        </div>
+
+        <!-- Ingredientes Seleccionados -->
+        <div class="panel-ingredientes">
+            <h2 class="panel-titulo">📋 Ingredientes Seleccionados</h2>
+            
+            <div id="lista-ingredientes">
+                <div class="lista-vacia">No hay ingredientes seleccionados</div>
+            </div>
+
+            <div class="botones-accion">
+                <a href="{% url 'generar_receta_gemini' %}" class="btn-primario" onclick="if(document.querySelector('.lista-vacia')) {alert('Selecciona ingredientes primero'); return false;}">
+                    🤖 Generar Receta con IA
+                </a>
+                <a href="{% url 'generar_multiples_ia' %}" class="btn-primario" onclick="if(document.querySelector('.lista-vacia')) {alert('Selecciona ingredientes primero'); return false;}">
+                    🔄 Generar Multiples
+                </a>
+                <button class="btn-secundario" onclick="limpiarTodos()">
+                    🗑️ Limpiar Todo
+                </button>
+                <a href="{% url 'productos' %}" class="btn-secundario">
+                    ← Volver
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+let ingredienteActual = null;
+
+// Búsqueda en tiempo real
+document.getElementById('busqueda-input').addEventListener('input', async function(e) {
+    const query = e.target.value.trim();
+    
+    if (query.length < 2) {
+        document.getElementById('resultados-busqueda').style.display = 'none';
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/buscar-ingredientes/?q=${encodeURIComponent(query)}`);
+        const data = await response.json();
+        
+        const resultadosDiv = document.getElementById('resultados-busqueda');
+        
+        if (data.resultados.length === 0) {
+            resultadosDiv.innerHTML = '<div class="resultado-item" style="color: #999;">Sin resultados</div>';
+        } else {
+            resultadosDiv.innerHTML = data.resultados.map(ing => `
+                <div class="resultado-item" onclick="seleccionarIngrediente('${ing.nombre}')">
+                    <div class="resultado-nombre">${ing.nombre}</div>
+                    <div class="resultado-categoria">${ing.categoria}</div>
+                </div>
+            `).join('');
+        }
+        
+        resultadosDiv.style.display = 'block';
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+function seleccionarIngrediente(nombre) {
+    ingredienteActual = nombre;
+    document.getElementById('busqueda-input').value = nombre;
+    document.getElementById('resultados-busqueda').style.display = 'none';
+    document.getElementById('inputs-cantidad').style.display = 'flex';
+    document.getElementById('cantidad-input').focus();
+}
+
+async function agregarIngredienteSeleccionado() {
+    if (!ingredienteActual) return;
+    
+    const cantidad = document.getElementById('cantidad-input').value;
+    const unidad = document.getElementById('unidad-select').value;
+    
+    try {
+        const response = await fetch('/api/agregar-ingrediente/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+                nombre: ingredienteActual,
+                cantidad: parseInt(cantidad),
+                unidad: unidad
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Limpiar y actualizar
+            document.getElementById('busqueda-input').value = '';
+            document.getElementById('cantidad-input').value = '1';
+            document.getElementById('unidad-select').value = 'unidades';
+            document.getElementById('inputs-cantidad').style.display = 'none';
+            ingredienteActual = null;
+            
+            // Actualizar lista
+            actualizarListaIngredientes(data.ingredientes);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al agregar ingrediente');
+    }
+}
+
+async function actualizarListaIngredientes(ingredientes = null) {
+    try {
+        const response = await fetch('/api/ingredientes-seleccionados/');
+        const data = await response.json();
+        const ingredientes_lista = data.ingredientes;
+        
+        const listaDiv = document.getElementById('lista-ingredientes');
+        
+        if (ingredientes_lista.length === 0) {
+            listaDiv.innerHTML = '<div class="lista-vacia">No hay ingredientes seleccionados</div>';
+        } else {
+            listaDiv.innerHTML = ingredientes_lista.map(ing => `
+                <div class="ingrediente-card">
+                    <div class="ingrediente-info">
+                        <div class="ingrediente-nombre">${ing.nombre}</div>
+                    </div>
+                    <div class="ingrediente-cantidad">
+                        <span>${ing.cantidad} ${ing.unidad}</span>
+                    </div>
+                    <button class="btn-eliminar" onclick="eliminarIngrediente('${ing.nombre}')">
+                        ✕
+                    </button>
+                </div>
+            `).join('');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function eliminarIngrediente(nombre) {
+    try {
+        const response = await fetch('/api/eliminar-ingrediente/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ nombre: nombre })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            actualizarListaIngredientes(data.ingredientes);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function limpiarTodos() {
+    if (!confirm('¿Estás seguro de que quieres limpiar todos los ingredientes?')) {
+        return;
+    }
+    
+    try {
+        const response = await fetch('/api/limpiar-ingredientes/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            actualizarListaIngredientes([]);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// Cargar ingredientes al iniciar
+window.addEventListener('load', function() {
+    actualizarListaIngredientes();
+});
+
+// Cerrar resultados al hacer clic fuera
+document.addEventListener('click', function(e) {
+    if (e.target.id !== 'busqueda-input') {
+        document.getElementById('resultados-busqueda').style.display = 'none';
+    }
+});
+</script>
+
+{% endblock %}
