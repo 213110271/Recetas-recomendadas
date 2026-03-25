@@ -6,13 +6,17 @@ import os
 import concurrent.futures
 
 # Obtener la API key de variables de entorno o de settings
-api_key = os.environ.get('GEMINI_API_KEY') or getattr(settings, 'GEMINI_API_KEY', None)
-
-if api_key and api_key != 'TU_API_KEY_AQUI':
-    try:
-        genai.configure(api_key=api_key)
-    except Exception as e:
-        print(f"Error configurando Gemini API: {e}")
+def configurar_gemini():
+    api_key = os.environ.get('GEMINI_API_KEY') or getattr(settings, 'GEMINI_API_KEY', None)
+    
+    if api_key and api_key != 'TU_API_KEY_AQUI':
+        try:
+            genai.configure(api_key=api_key)
+            return True
+        except Exception as e:
+            print(f"Error configurando Gemini API: {e}")
+    
+    return False
 
 def generar_receta_con_gemini(productos_seleccionados):
     """
@@ -42,7 +46,8 @@ def generar_receta_con_gemini(productos_seleccionados):
         productos_str = ", ".join(productos_seleccionados)
     
     # Verificar que la API esté configurada
-    if not api_key or api_key == 'TU_API_KEY_AQUI':
+   # Verificar que la API esté configurada
+    if not configurar_gemini():
         print("⚠️ GEMINI_API_KEY no está configurada")
         return generar_receta_fallback(productos_seleccionados)
     
