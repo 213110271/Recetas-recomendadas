@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
+from django.db.utils import OperationalError
 
 # 🔐 IMPORTAR AMBOS MÓDULOS DE SEGURIDAD
 from .security import (
@@ -181,8 +182,10 @@ def productos(request):
     from django.db.models import Q
     import random
     
-    # Obtener productos recomendados (aleatorios, máximo 20)
-    todos_productos = list(Producto.objects.all())
+    try:
+        todos_productos = list(Producto.objects.all())
+    except OperationalError:
+        todos_productos = []
     productos_recomendados = random.sample(todos_productos, min(20, len(todos_productos))) if todos_productos else []
 
     categorias = ["vegetales", "frutas", "carnes", "legumbres", "cereales", "condimentos", "especias"]
@@ -190,7 +193,10 @@ def productos(request):
     cat = request.GET.get("cat")
 
     if cat in categorias:
-        productos_lista = Producto.objects.filter(categoria=cat)
+        try:
+            productos_lista = Producto.objects.filter(categoria=cat)
+        except OperationalError:
+            productos_lista = []
         titulo = f"Productos de {cat.capitalize()}"
     else:
         productos_lista = productos_recomendados
@@ -231,7 +237,10 @@ def catalogo_categoria(request, categoria):
         if "ingredientes_seleccionados" in request.session:
             del request.session["ingredientes_seleccionados"]
 
-    productos = Producto.objects.filter(categoria=categoria)
+    try:
+        productos = Producto.objects.filter(categoria=categoria)
+    except OperationalError:
+        productos = []
     return render(request, "mattel/catalogo.html", {
         "productos": productos,
         "categoria": categoria,
